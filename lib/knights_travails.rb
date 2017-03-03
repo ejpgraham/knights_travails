@@ -2,6 +2,7 @@ class KnightPathFinder
 
   def initialize(start_pos)
     @start_pos = start_pos
+    @visited_positions = [start_pos]
   end
 
   def self.valid_moves(pos)
@@ -24,6 +25,18 @@ class KnightPathFinder
     valid_moves
   end
 
+  def new_move_positions(pos)
+    valid_moves = KnightPathFinder.valid_moves(pos)
+    new_moves = valid_moves.reject do |move|
+      @visited_positions.include?(move)
+    end
+
+    new_moves.each do |move|
+      @visited_positions << move
+    end
+
+    new_moves
+  end
 
   def build_move_tree
   end
